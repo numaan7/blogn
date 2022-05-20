@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}404 Not Found!{% endblock title %}
+{% block content %}
+<div class="p-5 text-center h-full">
+    <h1 class="text-2xl text-bold text-red-500">404</h1>
+     <h4 data-text="Opps! Page not found">
+    Opps! Page not found
+ </h4>
+ <p>
+    Sorry, the page you're looking for doesn't exist. If you think something is broken, report a problem.
+ </p>
+    <a href="/"><button class="bg-purple-700 p-3 hover:bg-purple-500 text-white rounded m-2">Go back To Home</button></a> or <a href="/"><button class="bg-purple-700 p-3 hover:bg-purple-500 text-white rounded m-2">Report Problem</button></a>
+
+</div>
+
+
+{% endblock content %}

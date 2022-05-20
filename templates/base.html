@@ -1,0 +1,105 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#7e22ce" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>{% block title %}BlogN{% endblock title %}</title>
+    <meta name="description" content="{% block desc %}Blogx a powerful website for bloggers{% endblock desc %}">
+    <meta name="keywords" content="{% block keyword %}{% endblock keyword %}">
+    <meta name="author" content="{% block author %}{% endblock author %}">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav
+        class="justify-center text-gray-500 text-center sm:flex w-full border p-5 z-10 top-0 sticky sm:justify-between bg-white">
+        <div class="logo text-center jusify-center sm:p-3">
+            <a href="/">
+            <span class="font-bold text-lg text-purple-700">BlogN</span></a>
+        </div>
+        <button class=" m-5 absolute top-0 right-0 sm:hidden " onclick="menu()"><i
+                class="hover:bg-purple-100 active:bg-purple-50 fa fa-bars border-gray-300 border px-2.5  py-2 rounded"></i></button>
+
+        <ul id="menu" class="hidden menu sm:block sm:flex justify-center space-x-3">
+            <li class="list-none m-3 hover:text-purple-700 "><a class="" href="/"><i class="fa fa-home"></i> Home</a>
+            </li>
+            <li class="list-none m-3 hover:text-purple-700 "><button onclick="category()" href=""><i class="fa fa-caret-down"></i> Courses</button>
+                <div class="category">
+                    <ul id="category" class="text-center p-5 absolute bg-white hidden z-10 justify-center ">
+                        {% for category in categories %}
+                        <li><a class="hover:text-blue-700 m-2 border-b-2 hover:border-blue-700" href="/category/{{category.name}}">{{category.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="dropdown hidden absolute mx-2 p-3 bg-white z-10 ">
+                    <ul>
+                        <li>home</li>
+    
+                </div>
+            </li>
+
+
+            
+            <li class="list-none m-3 hover:text-purple-700 "><a href=""><i class="fa fa-rss"></i> Blog</a></li>
+            <li class="list-none m-3 hover:text-purple-700 "><a href="/contact"><i class="fa fa-phone"></i> Contact</a></li>
+            <div class="search justify-center flex m-2">
+               
+                    
+                <button onclick="search()"><span class="text-bold text-lg mx-2 block "><i
+                            class="fa fa-search hover:text-purple-700"></i></span></button>
+                       <form action="/search" method="get">      
+                        {% csrf_token %}   
+                <input name="search"  id="search" class="border-2 p-1.5 rounded-full hidden border-purple-700" type="search">
+                
+                </form>
+            </div>
+        </ul>
+
+    </nav>
+    <main class="w-full h-auto m-auto">
+
+        {% block content %}
+
+        {% endblock content %}
+
+
+       
+
+        <footer class="p-5 bg-white text-gray-500 flex w-full justify-center space-x-5">
+            <span>
+                <h1 class="text-bold text-black">Blogx</h1>
+            </span>
+            <span>|</span>
+            <span>Copyright © 2022 BlogX</span>
+            <div class="social space-x-3">
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-instagram"></i>
+                <i class="fa fa-twitter"></i>
+            </div>
+        </footer>
+    </main>
+
+
+
+    <script>
+        function menu() {
+            document.getElementById("menu").classList.toggle("change");
+        }
+        function search() {
+            document.getElementById("search").classList.toggle("change");
+        }
+        function category() {
+            document.getElementById("category").classList.toggle("change");
+        }
+    </script>
+
+</body>
+
+</html>

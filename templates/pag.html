@@ -1,0 +1,21 @@
+{% if page.has_other_pages %}
+  <ul class="pagination text-center flex justify-center p-2 m-5  flex-cols ">
+    {% if page.has_previous %}
+      <li class="page-item bg-purple-700 text-white py-2 hover:bg-purple-500 px-3 rounded-lg mx-5"><a class="page-link" href="?page={{ page.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled page-item bg-purple-700 text-white py-2 hover:bg-purple-500 px-3 rounded-lg mx-5"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in page.paginator.page_range %}
+      {% if page.number == i %}
+        <li class="active page-item text-blue-500 text-white py-2 hover:bg-purple-500 px-3 rounded-lg mx-5"><span class="page-link">{{ i }}</span></li>
+      {% else %}
+        <li class="page-item text-blue-500  text-white py-2  px-3 rounded-lg mx-5"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page.has_next %}
+      <li class="page-item bg-purple-700 text-white py-2  px-3 rounded-lg mx-5"><a class="page-link" href="?page={{ page.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled page-item bg-purple-700 text-white py-2 hover:bg-purple-500 px-3 rounded-lg mx-5"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}

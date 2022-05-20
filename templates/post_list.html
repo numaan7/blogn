@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}BlogN{% endblock title %}
+{% block content %}
+{% if tag %}
+<h2 class="text-2xl text-center">Posts tagged with "{{ tag.name }}"</h2>
+{% endif %}
+<div class="container flex flex-col sm:flex-row w-full h-auto box-border m-auto">
+
+    <article class="text-gray-500 w-full rounded-lg shadow-xl m-1 h-auto sm:m-3 sm:p-3">
+        <div class="container w-full w-full h-auto sm:grid-cols-2 sm:grid">
+            {% for post in posts %}
+            <div class="posts hover:shadow-xl text-gray-500 m-2 sm:m-5 shadow-md overflow-hidden rounded-2xl ">
+                <div class=" featured w-auto overflow-hidden">
+                    <span  class="absolute  hover:bg-purple-100 opacity-80 m-3 p-3 rounded-lg text-gray-400 py-2  font-mono text-xs">
+                        {{post.category}}</span>
+                        <a href="/{{post.slug}}">
+                    <img class=" w-full"  src="{{post.image.url}}" alt="{{post.title}}"></a>
+                </div>
+                <div
+                    class="contentss justify-center rounded-2xl h-auto w-full sm:py-3 sm:px-3 p-6 box-border overflow-hidden">
+                    <div class="muted flex justify-between">
+                        <div class="i">
+                            <i class="fa fa-clock-o  hover:text-purple-700 text-gray-500 "></i> <span
+                                class="text-xs text-gray-500">Published at: {{post.created_at}}</span>
+                        </div>
+                        <div class="i"><i class="fa fa-eye text-gray-500 "></i><span
+                                class="text-gray-500 mx-2 text-xs">{{post.views}}</span></div>
+                        <div class="i"><i class="fa fa-user-o text-gray-500 "></i><span
+                                class="text-xs text-gray-500 mx-2">By
+                                {{post.author}}</span></div>
+                    </div>
+                    <a href="/{{post.slug}}">
+                        <h1 class="text-lg text-gray-700 py-2 font-bold">{{post.title}}</h1>
+                        <p class="text-base py-2 text-gray-700 ">{{ post.body|safe|striptags|truncatechars:100 }}</p>
+                    </a>
+                </div>
+                <a href="/{{post.slug}}">
+                    <button
+                        class="bg-purple-700 px-3 py-2 hover:bg-purple-500  rounded-xl text-sm  m-5 font-bold text-white">Read
+                        More ...</button></a>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+      {% include "pag.html" with page=posts %}
+
+
+    </article>
+
+  
+    <div class="sidebar sm:w-3/12 m-3 h-auto ">
+        <div class="sidebar1 p-3   h-auto rounded-lg shadow-xl text-gray-500">
+            <h1 class="text-2xl text-purple-700 text-center border-b-2 border-purple-700">Categories:</h1>
+            <ul class="text-center justify-center ">
+                {% for category in categories %}
+                <li><a class="hover:text-blue-700 border-b-2 hover:border-blue-700" href="/category/{{category.name}}">{{category.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="sidebar1 p-3   h-auto rounded-lg shadow-xl text-gray-500">
+            <h1 class="text-2xl text-purple-700 text-center border-b-2 border-purple-700">Recent Posts:</h1>
+            {% for recent_post in recent_post %}
+            <div class="posts hover:shadow-xl text-gray-500 m-2 sm:m-5 shadow-md overflow-hidden rounded-2xl ">
+                <div class=" featured w-auto overflow-hidden">
+                    <span  class="absolute  hover:bg-purple-100 opacity-80 m-3 p-3 rounded-lg text-gray-400 py-2  font-mono text-xs">
+                        {{post.category}}</span>
+                        <a href="/{{recent_post.slug}}">
+                    <img class=" w-full"  src="{{recent_post.image.url}}" alt="{{recent_post.title}}"></a>
+                </div>
+                
+                <div
+                    class="contentss justify-center rounded-2xl h-auto w-full sm:py-3 sm:px-3 p-6 box-border overflow-hidden">
+                    <div class="muted flex justify-between">
+                        <div class="i">
+                            <i class="fa fa-clock-o  hover:text-purple-700 text-gray-500 "></i> <span
+                                class="text-xs text-gray-500">Published at: {{recent_post.created_at}}</span>
+                        </div>
+                    </div>
+                    <a href="/{{post.slug}}">
+                        <h1 class="text-lg text-gray-700 py-2 font-bold">{{recent_post.title}}</h1>
+                        <p class="text-base py-2 text-gray-700 ">{{ post.body|safe|striptags|truncatechars:100 }}</p>
+                    </a>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="sidebar1 p-3 text-center h-fit rounded-lg shadow-xl text-gray-500">
+            <h1 class="text-2xl text-purple-700 text-center border-b-2 border-purple-700">Share This:</h1>
+            <div class="a2a_kit p-3 a2a_kit_size_64 a2a_default_style">
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                
+                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+            </div>
+            
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}
