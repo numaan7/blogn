@@ -1,14 +1,2 @@
 # blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
-# blogn
+Visit https://blogn-cms.herokuapp.com/
